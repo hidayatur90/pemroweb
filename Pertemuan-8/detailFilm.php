@@ -14,6 +14,8 @@ while($row = mysqli_fetch_array($result))
 	$rental_duration = $row['rental_duration'];
 	$rental_rate = $row['rental_rate'];
 	$length = $row['length'];
+    $hours = floor($length / 60);
+    $minutes = ($length % 60);
 	$replacement_cost = $row['replacement_cost'];
 	$rating = $row['rating'];
 	$special_features = $row['special_features'];
@@ -43,51 +45,63 @@ while($row = mysqli_fetch_array($result))
         .card-header, .card-footer { 
             opacity: 1
         }
+        .customBadge {
+            margin-top: 3px;
+            margin-right: 5px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border: 1px solid rgb(110, 110, 110);
+            padding: 1px 5px;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
 <section class="my-5">
     <div class="container px-4">
         <div class="row">
-            <div class="card mt-3 col-12 col-xxl-12 col-xl-12 col-lg- col-md-5 col-sm-6">
+            <div class="card mt-3 col-12 col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="card-body ms-2">
-                    <a href="index.php" class="btn btn-primary mb-3">
-                        <span class="bi bi-arrow-left me-2"></span>Kembali
-                    </a>
                     <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 text-center text-sm-start">
                         <img src="img/no-image.png" alt="<?= $title; ?>" width="250" height="400" class="me-4">    
                     </div>
                     <div class="mt-3 mt-sm-0 col text-center text-sm-start">
                         <h3><strong><?= $title; ?></strong> (<?= $release_year; ?>)</h3>
-                        <p>Rating : <strong><?= $rating; ?></strong></p>
-                        <p>Duration : <strong><?= $length; ?> </strong> minutes </p>
+                        <div class="d-flex">
+                            <div class="customBadge align-self-start"><?= $rating; ?></div>
+                            <p class="p"><?= $special_features; ?> &bull; <?= $hours, 'h ', $minutes, 'm' ?></p>
+                        </div>
                     </div>
-                    <div class="desc">
-                        <p>With Special Features : <?= $special_features; ?></p>
-                        <h5>Description</h5>
+                    <div class="desc mt-3">
+                        <h4><strong>Overview</strong></h4>
                         <p><?= $description; ?></p>
                     </div>
-                </div>
-                <div class="row text-center my-4 mx-3">
-                    <h5 class="text-start ms-4">More Details</h5>
-                    <table class="table table-light table-bordered table-responsive-sm">
-                        <thead class="col-6 col-md-3">
-                            <tr>
-                            <th scope="col">Language</th>
-                            <th scope="col">Rental Duration</th>
-                            <th scope="col">Rental Rate</th>
-                            <th scope="col">Replacement Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody class="col-6 col-md-3">
-                            <tr>
-                                <td>English</td>
-                                <td><?= $rental_duration; ?> days</td>
-                                <td>$<?= $rental_rate; ?></td>
-                                <td>$<?= $replacement_cost; ?></td>
-                            </tr>
-                        </tbody>
-                    </table>        
+                    <div class="row my-4 mx-3">
+                        <table class="table table-light table-bordered">
+                            <thead class="col-6 col-md-3">
+                                <tr>
+                                <th scope="col">Language</th>
+                                <th scope="col">Rental Duration</th>
+                                <th scope="col">Rental Rate</th>
+                                <th scope="col">Replacement Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody class="col-6 col-md-3">
+                                <tr>
+                                    <td>English</td>
+                                    <td><?= $rental_duration; ?> days</td>
+                                    <td>$<?= $rental_rate; ?></td>
+                                    <td>$<?= $replacement_cost; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>        
+                    </div>
+                    <div class="col-12">
+                        <a href="index.php" class="btn btn-primary w-100 my-3">
+                            <i class="bi-arrow-left-short"></i> Back
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
