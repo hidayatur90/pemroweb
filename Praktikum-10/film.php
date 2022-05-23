@@ -13,15 +13,15 @@ if($db->connect_error){
 }
 
 $begin = isset($_GET['begin']) ? $_GET['begin'] : 0;
-$query = "SELECT * FROM film LIMIT {$begin}, 9";
+$query = "SELECT * FROM film LIMIT {$begin}, 12";
 $sql = $db->query($query);
 $data = [];
 
 while($row = $sql->fetch_assoc()){
     if(file_exists("assets/{$row['film_id']}.jpg")){
-        $row['thumnail'] = "assets/{$row['film_id']}.jpg";
+        $row['img'] = "assets/{$row['film_id']}.jpg";
     } else{
-        $row['thumnail'] = "assets/no-image.png";
+        $row['img'] = "assets/no-image.png";
     }
     array_push($data, $row);
 }
