@@ -1,9 +1,9 @@
 <?php
 
 const DB_HOST = 'localhost';
-const DB_USER = 'root';
-const DB_PASS = '';
-const DB_NAME = 'sakila';
+const DB_USER = '202410101057';
+const DB_PASS = 'secret';
+const DB_NAME = 'uas202410101057';
 
 sleep(2);
 $db = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
