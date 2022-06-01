@@ -97,7 +97,7 @@
         $(document).ready(function(){
             $("#load").click(function (){
                 $(this).html("Loading...").attr("disabled", "disabled")
-                $.get("film.php?begin="+page, function(response){
+                $.post("film.php?mode="+page, function(response){
                     $.each(response, function (key,value){
                         $("#data").append("<div class='col d-flex justify-content-center mb-4'><div class='card'>" + 
                         "<img class='card-img-top' src='" + value.img +"'/>" +

@@ -23,7 +23,7 @@
             </h1>
         </div>
 
-        <form>
+        <form method="POST" action="film.php">
             <!-- Thumbnail-->
             <!-- <div class="row mb-3">
                 <label for="thumbnail" class="col-form-label col-sm-4 col-md-3 col-xl-2">Thumbnail</label>
@@ -125,11 +125,11 @@
                 <label for="rating" class="col-form-label col-sm-4 col-md-3 col-xl-2">Rating *</label>
                 <div class="col-sm-8 col-md-9 col-xl-10">
                     <select class="form-select" id="rating" name="rating" required="required">
-                        <option selected="selected">G</option>
-                        <option>PG</option>
-                        <option>PG-13</option>
-                        <option>R</option>
-                        <option>NC-17</option>
+                        <option selected="selected" value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                        <option value="NC-17">NC-17</option>
                     </select>
                 </div>
             </div>
@@ -171,14 +171,14 @@
         $(document).ready(function(){
             $.get("language.php", function(response){
                 $.each(response, function(key,value){
-                    $("#language_id").append("<option value='" + value.languange_id + "'>" + value.name + "</option>");
-                    $("#original_language_id").append("<option value='" + value.languange_id + "'>" + value.name + "</option>");
+                    $("#language_id").append("<option value='" + value.language_id + "'>" + value.name + "</option>");
+                    $("#original_language_id").append("<option value='" + value.language_id + "'>" + value.name + "</option>");
                 });
             });
             $("form").submit(function(event){
                 event.preventDefault();
                 var data = $(this).serialize();
-                $.post("film.php?action=create", data, function(response){
+                $.post("film.php?mode=add", data, function(response){
                     alert("Data berhasil ditambahkan.");
                 });
             });

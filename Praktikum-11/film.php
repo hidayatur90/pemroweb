@@ -1,6 +1,6 @@
 <?php
 
-require_once('db_con.php');
+require_once('db.php');
 
 class Film{
     private $db;
@@ -15,8 +15,8 @@ class Film{
     }
 
     function read(){
-        $begin = isset($_GET['begin']) ? $_GET['begin'] : 0;
-        $query = "SELECT * FROM film LIMIT {$begin}, 12";
+        $mode = isset($_GET['mode']) ? $_GET['mode'] : 0;
+        $query = "SELECT * FROM film ORDER BY title ASC LIMIT {$mode}, 12";
         $sql = $this->db->query($query);
         $data = [];
 
@@ -33,7 +33,7 @@ class Film{
         echo json_encode($data);
     }
 
-    function create($data){
+    function add($data){
 
         foreach ($data as $key => $value) {
             $value = is_array($value) ? trim(implode(',', $value)) : trim($value);
@@ -42,7 +42,7 @@ class Film{
 
         $query = "INSERT INTO film VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         $sql = $this->db->prepare($query);
-        $sql->bind_param(
+        $sql -> bind_param(
             'ssiiiididss',
             $data['title'],
             $data['description'],
@@ -56,6 +56,7 @@ class Film{
             $data['rating'],
             $data['special_features']
         );
+
         try {
             $sql->execute();
         } catch (\Exception $e) {
@@ -68,13 +69,12 @@ class Film{
 }
 
 $film = new Film();
-switch ($_GET['action']) {
-    case 'create':
-        $film->create($_POST);
-        break;
-    default:
-        $film->read();
-        break;
+$condition = $_GET['mode'];
+
+if ($condition == 'add') {
+    $film->add($_POST);
+} else {
+    $film->read();
 }
 
 ?>
