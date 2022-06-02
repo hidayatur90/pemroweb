@@ -175,6 +175,7 @@
                     $("#original_language_id").append("<option value='" + value.language_id + "'>" + value.name + "</option>");
                 });
             });
+            
             $("form").submit(function(event){
                 event.preventDefault();
                 var data = $(this).serialize();
