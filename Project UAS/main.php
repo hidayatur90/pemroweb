@@ -88,7 +88,7 @@
 <body>
     <div class="container">
         <div class="container-fluid">
-            <div class="row g-2 g-lg-3 mt-4">
+            <div class="row g-2 g-lg-3 mt-4"> 
                 <div class="col-lg-10 px-5">
                     <h2 class="fw-bolder"><a href="index.html">Best & Popular Books</a></h2>
                 </div>
