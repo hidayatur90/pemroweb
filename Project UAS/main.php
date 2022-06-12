@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <title>1057 | Pertemuan 8</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Yuk! Cari Buku</title>
+    <link href="assets/css/style.css" rel="stylesheet">
     <style>
         body {
-            background-color: black;
-            background-image: url("img/netflix.jpg");
-            font-size : 13px;
+            font-family: "Open Sans", sans-serif;
+            width: 100%;
+            height: 100vh;
+            background: url(assets/img/hero-bg.png) top center no-repeat;
+            background-size: cover;
         }   
         .card {
             margin-top: 20px;
@@ -61,6 +66,23 @@
             border:none;
             color: blue;
         }
+        .btn-primary {
+            margin-top: 30px;
+            line-height: 0;
+            padding: 15px 20px;
+            border-radius: 4px;
+            transition: 0.5s;
+            color: #fff;
+            background: #4154f1;
+            box-shadow: 0px 5px 30px rgba(65, 84, 241, 0.4);
+        }
+        a {
+            text-decoration: none !important; 
+            color:black;
+        }
+        h2 a {
+            color:#012970;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +90,7 @@
         <div class="container-fluid">
             <div class="row g-2 g-lg-3 mt-4">
                 <div class="col-lg-10 px-5">
-                    <h2 class="fw-bolder text-white">Popular Movies</h2>
+                    <h2 class="fw-bolder"><a href="index.html">Best & Popular Books</a></h2>
                 </div>
                 <div class="col-lg-2 gx-5 px-4 ml-4">
                     <button type="button" class="btn btn-primary">
@@ -142,23 +164,23 @@
                     <div class="row" id="data">
                     <?php
                         require_once ("./db.php");
-                        $sql = "SELECT * FROM film";
+                        $sql = "SELECT * FROM bestsellers_with_categories LIMIT 12";
                         $result = $db->query($sql);
                         while ($row = $result->fetch_assoc()) { ?>
 
                         <div class="col-12 col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mx-0.5 my-1">
-                            <a href="detailFilm.php?id=<?=$row['film_id']?>" style="text-decoration: none !important; color:black;">
-                            <div class="card">
-                                <img src="img/no-image.png" class="card-img-top" alt="<?= $row["title"]; ?>">
+                            <a href="detailFilm.php?id=<?=$row['id']?>">
+                            <div class="card" data-aos="fade-up">
+                                <img src="img/no-image.png" class="card-img-top" alt="<?= $row["Name"]; ?>">
                                 <div class="card-body">
-                                    <h4 class="card-title"><?= $row["title"]; ?></h4>
-                                    <p class="card-text"><?= $row["rating"]; ?></p>
+                                    <marquee><h4 class="card-title"><?= $row["Name"]; ?></h4></marquee>
+                                    <p class="card-text">Rating : <?= $row["User Rating"]; ?></p>
                                     <div class="icon">
                                         <button type="button" class="edit-icon">
-                                            <i class="bi bi-pencil-square mx-1"></i>
+                                            <i class="bi bi-pencil-square"></i>
                                         </button>
                                         <button type="button" class="trash-icon">
-                                            <i class="bi bi-trash3-fill red mx-1"></i>
+                                            <i class="bi bi-trash3-fill red"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -179,8 +201,15 @@
     <!-- pooper js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
-    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        AOS.init();
+    </script>
     <script src="title.js"></script>
     <script src="rating.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
